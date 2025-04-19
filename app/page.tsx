@@ -108,14 +108,17 @@ export default function Home() {
       {/* Video Section */}
       <section className="py-20 text-center">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-gray-200 rounded-lg overflow-hidden aspect-video">
-            <Image
-              src="/placeholder.svg?height=450&width=800"
-              alt="Video placeholder"
-              width={800}
-              height={450}
-              className="w-full h-full object-cover"
-            />
+          <div className="max-w-4xl mx-auto rounded-lg overflow-hidden aspect-video">
+            <iframe
+              width="800"
+              height="450"
+              src="https://www.youtube.com/embed/AdQoiSiIE28?controls=1&disablekb=1&rel=0&modestbranding=1&showinfo=0"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
           </div>
         </div>
       </section>
