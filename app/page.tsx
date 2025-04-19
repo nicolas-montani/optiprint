@@ -1,35 +1,15 @@
-import Image from "next/image"
-import ImageCarousel from "@/components/image-carousel"
-import Timeline from "@/components/timeline"
-import LinkedInFeed from "@/components/linkedin-feed"
-import Footer from "@/components/footer"
+import Image from "next/image";
+import ThreeJsHero from "@/components/ThreeJsHero";
+import ImageCarousel from "@/components/image-carousel";
+import Timeline from "@/components/timeline";
+import LinkedInFeed from "@/components/linkedin-feed";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative flex flex-col md:flex-row min-h-[90vh] w-full bg-white overflow-hidden">
-        <div className="w-full md:w-1/2 flex items-center p-8 md:p-[5%] relative z-10">
-          <div className="w-full">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light italic leading-none mb-4 text-black">
-              JUBILÄUM/
-            </h1>
-            <h2 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[0.9] mb-8 text-black uppercase">
-              OPTIPRINT
-            </h2>
-            <h3 className="text-5xl md:text-6xl lg:text-7xl font-normal italic text-black mt-8">40 JAHRE</h3>
-          </div>
-        </div>
-        <div className="w-full md:w-1/2 h-[60vh] md:h-auto relative overflow-hidden">
-          <Image
-            src="/placeholder.svg?height=800&width=600"
-            alt="Optiprint PCB Technology"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-        </div>
-      </section>
+      {/* Hero Section with Three.js */}
+      <ThreeJsHero />
 
       {/* CEO Message Section */}
       <section className="py-24 bg-gray-50">
@@ -75,5 +55,5 @@ export default function Home() {
       {/* Footer */}
       <Footer />
     </main>
-  )
+  );
 }
