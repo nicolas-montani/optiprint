@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 
+
 const milestones = [
   {
     year: "1985",
@@ -79,7 +80,7 @@ export default function Timeline() {
 
 // Replace the MilestoneItem function with this updated version that uses scale animation instead of fade-in
 
-function MilestoneItem({ milestone, index }) {
+function MilestoneItem({ milestone, index }: { milestone: any; index: number }) {
   const [isVisible, setIsVisible] = useState(false)
   const ref = useRef(null)
 
