@@ -19,6 +19,11 @@ const config = {
     },
     extend: {
       colors: {
+        'optiprint': {
+          blue: '#002F63',  // RGB: 0, 47, 99
+          grey: '#97979B',  // RGB: 151, 151, 155
+          red: '#C51D34',   // RAL 3027 (Raspberry red)
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
