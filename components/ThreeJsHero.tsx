@@ -221,8 +221,8 @@ export default function ThreeJsHero() {
       {/* Text overlay - adjusted to be lower with mt-16 (margin-top) */}
       <div className="absolute top-0 left-0 z-10 p-8 md:p-[5%] mt-16">
         <div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light italic leading-none mb-4 text-black">
-            JUBILÄUM
+          <h1 className="text-[#002F63] text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light italic leading-none mb-4">
+            40 JAHRE
           </h1>
           {/* Replaced text with SVG logo */}
           <div className="mb-8">
@@ -232,7 +232,7 @@ export default function ThreeJsHero() {
               className="w-auto h-32 md:h-40 lg:h-56 xl:h-64"
             />
           </div>
-          <h3 className="text-5xl md:text-6xl lg:text-7xl font-normal italic text-black mt-8">40 JAHRE</h3>
+          <h3 className="text-5xl md:text-6xl lg:text-7xl font-normal italic text-black mt-8"> </h3>
         </div>
       </div>
       
