@@ -1,7 +1,6 @@
 // Project: optiprint
 "use client"
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import ThreeJsHero from "@/components/ThreeJsHero";
 import ImageCarousel from "@/components/image-carousel";
