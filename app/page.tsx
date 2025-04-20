@@ -7,6 +7,7 @@ import ImageCarousel from "@/components/image-carousel";
 import Timeline from "@/components/timeline";
 import LinkedInFeed from "@/components/linkedin-feed";
 import Footer from "@/components/footer";
+import CeoText from "@/components/CeoText";
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -82,21 +83,7 @@ export default function Home() {
       <ThreeJsHero />
 
       {/* CEO Message Section */}
-      <section className="py-24 bg-gray-50">
-        <div className="container max-w-5xl mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-          <h2 className="text-[#002F63] text-base font-semibold tracking-wide mb-4 text-left">VON DER GESCHÄFTSFÜHRUNG</h2>
-            <div className="w-full h-px bg-black mb-10"></div>
-            <blockquote className="text-2xl md:text-3xl lg:text-4xl leading-tight font-normal mb-10 text-left">
-              "Seit 1985 entwickeln wir mit Leidenschaft und Expertise innovative Leiterplattenlösungen – eine
-              Erfolgsgeschichte aus der Schweiz. Gemeinsam mit unseren Kunden und Partnern gestalten wir seit vier
-              Jahrzehnten die Zukunft der Elektronik. Wir sind stolz auf das, was wir erreicht haben, und blicken mit
-              Begeisterung auf die kommenden Herausforderungen."
-            </blockquote>
-            <p className="text-sm font-semibold tracking-wide text-left">HANS JÖRG, CEO AT OPTIPRINT AG</p>
-          </div>
-        </div>
-      </section>
+      <CeoText />
 
       {/* Image Carousel Section */}
       <ImageCarousel />
