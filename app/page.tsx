@@ -1,17 +1,21 @@
-// Project: optiprint
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ThreeJsHero from "@/components/ThreeJsHero";
 import ImageCarousel from "@/components/image-carousel";
 import Timeline from "@/components/timeline";
 import LinkedInFeed from "@/components/linkedin-feed";
 import Footer from "@/components/footer";
 import CeoText from "@/components/CeoText";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
-
+  const [showEasterEgg, setShowEasterEgg] = useState(false);
+  const [clicksLeft, setClicksLeft] = useState(5);
+  const touchCountRef = useRef(0);
+  const router = useRouter();
+  
   useEffect(() => {
     // Add CSS to hide the default scrollbar - more comprehensive approach
     const style = document.createElement('style');
@@ -56,18 +60,58 @@ export default function Home() {
       setScrollProgress(progress);
     };
 
-    // Add scroll event listener
+    // Easter egg touch/click handler
+    const handleTouch = () => {
+      touchCountRef.current += 1;
+      
+      if (touchCountRef.current > 5) {
+        // Show the popup after 5 clicks
+        setShowEasterEgg(true);
+        
+        // Update clicks left
+        setClicksLeft(prev => {
+          const newCount = prev - 1;
+          
+          // Redirect when count reaches 0
+          if (newCount <= 0) {
+            setTimeout(() => {
+              router.push('/game');
+            }, 500);
+          }
+          
+          return newCount;
+        });
+      }
+    };
+
+    // Add event listeners
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("click", handleTouch);
+    window.addEventListener("touchstart", handleTouch);
     
-    // Cleanup event listener on unmount
+    // Cleanup event listeners on unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("click", handleTouch);
+      window.removeEventListener("touchstart", handleTouch);
       document.head.removeChild(style);
     };
-  }, []);
+  }, [router]);
 
   return (
     <main className="min-h-screen relative">
+      {/* Easter Egg Popup */}
+      {showEasterEgg && (
+        <div 
+          className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-md z-50 shadow-lg transition-opacity duration-300"
+          style={{
+            opacity: clicksLeft <= 0 ? 0 : 1,
+          }}
+        >
+          {clicksLeft <= 0 ? "Redirecting..." : `${clicksLeft} clicks left`}
+        </div>
+      )}
+
       {/* Custom Scroll Progress Bar */}
       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 h-40 w-1 bg-transparent z-50">
         <div 
