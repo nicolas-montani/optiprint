@@ -60,34 +60,64 @@ export default function Home() {
       setScrollProgress(progress);
     };
 
-    // Easter egg touch/click handler
-    const handleTouch = () => {
+    // Handle multiple touch events for Easter egg
+    let touchTimeout = null;
+    const touchEvents = [];
+    
+    // Easter egg touch/click handler with improved mobile support
+    const handleTouch = (e) => {
+      // Prevent double counting of touch and click on mobile devices
+      if (e.type === 'click' && e.pointerType === 'touch') return;
+      
+      // For touchstart, record timestamp to detect rapid tapping
+      if (e.type === 'touchstart') {
+        const now = Date.now();
+        touchEvents.push(now);
+        
+        // Only keep touch events from the last 5 seconds
+        while (touchEvents.length > 0 && now - touchEvents[0] > 5000) {
+          touchEvents.shift();
+        }
+        
+        // If we have more than 5 touches in the last 5 seconds, trigger the Easter egg
+        if (touchEvents.length > 5 && !showEasterEgg) {
+          setShowEasterEgg(true);
+          touchCountRef.current = 6; // Start countdown from 5
+        }
+      }
+      
       touchCountRef.current += 1;
       
-      if (touchCountRef.current > 5) {
-        // Show the popup after 5 clicks
-        setShowEasterEgg(true);
-        
-        // Update clicks left
-        setClicksLeft(prev => {
-          const newCount = prev - 1;
+      // Clear any existing timeout to debounce rapid clicks/touches
+      if (touchTimeout) clearTimeout(touchTimeout);
+      
+      // Set a small delay to prevent accidental triggers
+      touchTimeout = setTimeout(() => {
+        if (touchCountRef.current > 5) {
+          // Show the popup after 5 clicks
+          setShowEasterEgg(true);
           
-          // Redirect when count reaches 0
-          if (newCount <= 0) {
-            setTimeout(() => {
-              router.push('/game');
-            }, 500);
-          }
-          
-          return newCount;
-        });
-      }
+          // Update clicks left
+          setClicksLeft(prev => {
+            const newCount = prev - 1;
+            
+            // Redirect when count reaches 0
+            if (newCount <= 0) {
+              setTimeout(() => {
+                router.push('/game');
+              }, 500);
+            }
+            
+            return newCount;
+          });
+        }
+      }, 50);
     };
 
-    // Add event listeners
-    window.addEventListener("scroll", handleScroll);
+    // Add event listeners - use passive: true for better mobile performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("click", handleTouch);
-    window.addEventListener("touchstart", handleTouch);
+    window.addEventListener("touchstart", handleTouch, { passive: true });
     
     // Cleanup event listeners on unmount
     return () => {
@@ -95,6 +125,7 @@ export default function Home() {
       window.removeEventListener("click", handleTouch);
       window.removeEventListener("touchstart", handleTouch);
       document.head.removeChild(style);
+      if (touchTimeout) clearTimeout(touchTimeout);
     };
   }, [router]);
 
@@ -106,6 +137,12 @@ export default function Home() {
           className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-md z-50 shadow-lg transition-opacity duration-300"
           style={{
             opacity: clicksLeft <= 0 ? 0 : 1,
+            fontSize: '16px',
+            fontWeight: '500',
+            minWidth: '120px',
+            textAlign: 'center',
+            touchAction: 'none',
+            pointerEvents: 'none'
           }}
         >
           {clicksLeft <= 0 ? "Redirecting..." : `${clicksLeft} clicks left`}
