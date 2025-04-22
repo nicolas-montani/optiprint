@@ -13,7 +13,7 @@ export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
   const [clicksLeft, setClicksLeft] = useState(5);
-  const touchCountRef = useRef(0);
+  const clickCountRef = useRef(0);
   const router = useRouter();
   
   useEffect(() => {
@@ -60,58 +60,48 @@ export default function Home() {
       setScrollProgress(progress);
     };
 
-    // Handle multiple touch events for Easter egg
-    let touchTimeout = null;
-    const touchEvents = [];
+    // Easter egg touch/click handler with reset every second
+    let resetTimeout: any = null;
     
-    // Easter egg touch/click handler with improved mobile support
-    const handleTouch = (e) => {
+    const handleTouch = (e: any) => {
       // Prevent double counting of touch and click on mobile devices
       if (e.type === 'click' && e.pointerType === 'touch') return;
       
-      // For touchstart, record timestamp to detect rapid tapping
-      if (e.type === 'touchstart') {
-        const now = Date.now();
-        touchEvents.push(now);
-        
-        // Only keep touch events from the last 5 seconds
-        while (touchEvents.length > 0 && now - touchEvents[0] > 5000) {
-          touchEvents.shift();
-        }
-        
-        // If we have more than 5 touches in the last 5 seconds, trigger the Easter egg
-        if (touchEvents.length > 5 && !showEasterEgg) {
-          setShowEasterEgg(true);
-          touchCountRef.current = 6; // Start countdown from 5
-        }
+      // Increment click count
+      clickCountRef.current += 1;
+      
+      // If we've reached 10+ clicks and haven't shown the easter egg yet
+      if (clickCountRef.current >= 10 && !showEasterEgg) {
+        setShowEasterEgg(true);
+        setClicksLeft(5); // Start countdown from 5 after showing
       }
       
-      touchCountRef.current += 1;
-      
-      // Clear any existing timeout to debounce rapid clicks/touches
-      if (touchTimeout) clearTimeout(touchTimeout);
-      
-      // Set a small delay to prevent accidental triggers
-      touchTimeout = setTimeout(() => {
-        if (touchCountRef.current > 5) {
-          // Show the popup after 5 clicks
-          setShowEasterEgg(true);
+      // If the easter egg is showing, count down clicks
+      if (showEasterEgg) {
+        setClicksLeft(prev => {
+          const newCount = prev - 1;
           
-          // Update clicks left
-          setClicksLeft(prev => {
-            const newCount = prev - 1;
-            
-            // Redirect when count reaches 0
-            if (newCount <= 0) {
-              setTimeout(() => {
-                router.push('/game');
-              }, 500);
-            }
-            
-            return newCount;
-          });
+          // Redirect when count reaches 0
+          if (newCount <= 0) {
+            setTimeout(() => {
+              router.push('/game');
+            }, 500);
+          }
+          
+          return newCount;
+        });
+      }
+      
+      // Clear any existing timeout to reset our counter
+      if (resetTimeout) clearTimeout(resetTimeout);
+      
+      // Set a timeout to reset the click count after 1 second of inactivity
+      resetTimeout = setTimeout(() => {
+        // Only reset if we haven't triggered the easter egg yet
+        if (!showEasterEgg) {
+          clickCountRef.current = 0;
         }
-      }, 50);
+      }, 1000);
     };
 
     // Add event listeners - use passive: true for better mobile performance
@@ -125,9 +115,9 @@ export default function Home() {
       window.removeEventListener("click", handleTouch);
       window.removeEventListener("touchstart", handleTouch);
       document.head.removeChild(style);
-      if (touchTimeout) clearTimeout(touchTimeout);
+      if (resetTimeout) clearTimeout(resetTimeout);
     };
-  }, [router]);
+  }, [router, showEasterEgg]);
 
   return (
     <main className="min-h-screen relative">
