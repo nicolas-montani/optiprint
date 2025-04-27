@@ -11,6 +11,8 @@ export default function VideoSection() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+  // Add a new state to track if user manually controlled playback
+  const [userControlled, setUserControlled] = useState(false);
 
   // Update video progress
   const updateProgress = () => {
@@ -34,6 +36,10 @@ export default function VideoSection() {
       const rect = progressRef.current.getBoundingClientRect();
       const pos = (e.clientX - rect.left) / progressRef.current.clientWidth;
       videoRef.current.currentTime = pos * videoRef.current.duration;
+      
+      // Mark as user-controlled when seeking
+      setUserControlled(true);
+      setHasInteracted(true);
     }
   };
 
@@ -43,13 +49,18 @@ export default function VideoSection() {
       // Mark that user has interacted with video
       setHasInteracted(true);
       
+      // Set user-controlled flag to true when manually toggling
+      setUserControlled(true);
+      
       // Ensure sound is on when user explicitly plays
       videoRef.current.muted = false;
       
       if (isPlaying) {
         videoRef.current.pause();
       } else {
-        videoRef.current.play();
+        videoRef.current.play().catch(error => {
+          console.error("Failed to play video:", error);
+        });
       }
       setIsPlaying(!isPlaying);
     }
@@ -75,37 +86,29 @@ export default function VideoSection() {
         // Update visibility state
         setIsVisible(entry.isIntersecting);
         
-        // Autoplay when video comes into view
-        if (entry.isIntersecting && videoRef.current && !isPlaying) {
-          // Ensure sound is on
-          if (videoRef.current.muted) {
+        // Only handle autoplay if the user hasn't manually controlled playback
+        if (!userControlled) {
+          // Autoplay when video comes into view
+          if (entry.isIntersecting && videoRef.current && !isPlaying) {
+            // Attempt to play with sound
             videoRef.current.muted = false;
+            
+            videoRef.current.play()
+              .then(() => {
+                setIsPlaying(true);
+                console.log("Autoplay with sound started successfully");
+              })
+              .catch((error) => {
+                console.error("Autoplay with sound failed:", error);
+                // We won't try muted autoplay as fallback, instead wait for user interaction
+              });
           }
           
-          videoRef.current.play()
-            .then(() => {
-              setIsPlaying(true);
-              console.log("Autoplay with sound started successfully");
-            })
-            .catch((error) => {
-              console.error("Autoplay with sound failed:", error);
-              
-              // If we're not going to try muted autoplay as fallback, show a visual cue
-              // that encourages the user to interact with the video
-              // This addresses browser autoplay policies that require user interaction
-              
-              // We'll leave the video unmuted but not playing, waiting for user click
-              // The play button will be visible because isPlaying is still false
-              
-              // Optionally, you could add an additional visual cue here to prompt user interaction
-              // like an animated play button or a text overlay
-            });
-        }
-        
-        // Optionally pause when video goes out of view
-        if (!entry.isIntersecting && videoRef.current && isPlaying) {
-          videoRef.current.pause();
-          setIsPlaying(false);
+          // Pause when video goes out of view (only if not user-controlled)
+          if (!entry.isIntersecting && videoRef.current && isPlaying) {
+            videoRef.current.pause();
+            setIsPlaying(false);
+          }
         }
       });
     }, options);
@@ -121,7 +124,7 @@ export default function VideoSection() {
         observer.unobserve(videoContainerRef.current);
       }
     };
-  }, [isPlaying]);
+  }, [isPlaying, userControlled]); // Add userControlled to dependencies
 
   useEffect(() => {
     const video = videoRef.current;
@@ -129,9 +132,19 @@ export default function VideoSection() {
       video.addEventListener('timeupdate', updateProgress);
       video.addEventListener('loadedmetadata', handleLoadedMetadata);
       
+      // Add ended event listener to reset userControlled state
+      const handleEnded = () => {
+        setIsPlaying(false);
+        // Optionally reset userControlled when video ends
+        // setUserControlled(false);
+      };
+      
+      video.addEventListener('ended', handleEnded);
+      
       return () => {
         video.removeEventListener('timeupdate', updateProgress);
         video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        video.removeEventListener('ended', handleEnded);
       };
     }
   }, []);
@@ -139,6 +152,7 @@ export default function VideoSection() {
   return (
     <section className="w-full py-8 bg-gray-100">
       <div className="max-w-6xl mx-auto px-4">
+        {/* Content inside this div */}
         <div 
           ref={videoContainerRef}
           className="relative overflow-hidden rounded-xl shadow-lg bg-black"
