@@ -7,8 +7,8 @@ import { Analytics } from "@vercel/analytics/react"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Optiprint AG - 40 Jahre Jubiläum",
-  description: "Wir feiern 40 Jahre Innovation und Qualität in der Leiterplattenherstellung",
+  title: "Optiprint | 40 Jahre innovativer PCB-Partner weltweit",
+  description: "Seit 40 Jahren ist Optiprint zuverlässiger Leiterplattenhersteller aus der Schweiz für anspruchsvolle Anwendungen von der Medizintechnik bis zur Raumfahrt.",
 }
 
 export default function RootLayout({

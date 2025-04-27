@@ -8,6 +8,7 @@ import LinkedInFeed from "@/components/linkedin-feed";
 import Footer from "@/components/footer";
 import CeoText from "@/components/CeoText";
 import { useRouter } from "next/navigation";
+import VideoSection from "@/components/VideoSection";
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -163,23 +164,8 @@ export default function Home() {
       <Timeline />
 
       {/* Video Section */}
-      <section className="py-20 text-center">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto rounded-lg overflow-hidden aspect-video">
-            <iframe
-              width="800"
-              height="450"
-              src="https://www.youtube.com/embed/AdQoiSiIE28?controls=1&disablekb=1&rel=0&modestbranding=1&showinfo=0"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-            ></iframe>
-          </div>
-        </div>
-      </section>
-
+      <VideoSection />
+      
       {/* LinkedIn Section */}
       <LinkedInFeed />
 

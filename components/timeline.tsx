@@ -7,66 +7,73 @@ import { useEffect, useRef, useState } from "react"
 const milestones = [
   {
     year: "1985",
-    title: "Gründung",
+    title: "Gründung von Optiprint: Der Ursprung von 40 Jahren Schweizer Präzision",
     description:
-      "Optiprint wird in St. Gallen gegründet. Mit einer kleinen Produktionsfläche und großen Ambitionen beginnt die Erfolgsgeschichte unseres Unternehmens. Die ersten Leiterplatten werden in einer kleinen Werkstatt produziert, doch die Vision ist von Anfang an groß.",
-    imagePath: "/images/image1.jpg"
+      "Im Jahr 1985 wird Optiprint als Schweizer Leiterplattenhersteller in Rehetobel AR gegründet – mit einer klaren Vision: Leiterplattenfertigung mit Präzision, Qualität und technologischem Anspruch. In einer ehemaligen Weberei startet das Unternehmen mit ersten Kundenaufträgen – der Beginn von 40 Jahren Optiprint. Von Anfang an steht das Streben nach Verlässlichkeit und technologischer Exzellenz im Zentrum. ",
+    imagePath: "/images/image1.png"
   },
   {
-    year: "1992",
-    title: "Umzug nach Berneck",
+    year: "1987",
+    title: "Erste Hochfrequenzleiterplatte: Technologischer Vorsprung früh gesichert",
     description:
-      "Optiprint zieht an den neuen Standort in Berneck. Der Umzug ermöglicht eine Erweiterung der Produktionskapazität und die Umsetzung innovativer Fertigungsprozesse. Mit mehr Raum und modernen Anlagen können komplexere Projekte realisiert werden.",
+      "Bereits zwei Jahre nach der Gründung entwickelt Optiprint seine erste Hochfrequenzleiterplatte. Die frühe Spezialisierung in diesem Bereich macht das Unternehmen zu einem der Pioniere der innovativen Leiterplattentechnologie in der Schweiz. Besonders Kunden aus der Telekommunikation profitieren von der technologischen Weitsicht. ",
     imagePath: "/images/image2.jpg"
   },
   {
-    year: "1998",
-    title: "Produktinnovation",
+    year: "1989",
+    title: "Starr-Flex-Technologie als Wendepunkt für Spezialanwendungen",
     description:
-      "Einführung neuer Technologien zur Herstellung von High-End-Leiterplatten. Optiprint etabliert sich als führender Anbieter in der Schweiz. Die Investition in fortschrittliche Fertigungsmethoden zahlt sich aus und erschließt neue Marktpotenziale.",
+      "Mit der Einführung der Starr-Flex-Leiterplatte erweitert Optiprint sein Portfolio um eine besonders vielseitige Lösung für kompakte und robuste Designs. Die Technologie etabliert das Unternehmen als zuverlässigen PCB-Partner Schweiz, insbesondere für anspruchsvolle Kunden in der Medizintechnik und Verteidigung.",
     imagePath: "/images/image3.jpg"
   },
   {
-    year: "2005",
-    title: "Neue Führung",
+    year: "1998",
+    title: "Umzug nach Berneck: Standort mit Zukunft",
     description:
-      "Hans Jörg übernimmt die Position des CEO. Unter seiner Führung beginnt eine neue Ära des Wachstums und der internationalen Expansion. Mit frischen Ideen und strategischem Weitblick wird das Unternehmen auf den globalen Markt ausgerichtet.",
+      "Optiprint zieht 1998 an den heutigen Standort in Berneck. Die deutlich größere Fläche schafft Raum für mehr Maschinen, bessere Abläufe und zukunftsorientierte Prozesse. Damit wird der Weg geebnet für weiteres Wachstum als Schweizer Leiterplattenhersteller mit internationaler Ausrichtung. ",
     imagePath: "/images/image4.jpg"
   },
   {
-    year: "2010",
-    title: "Weltraummission",
+    year: "1999",
+    title: "Eigene Galvanik: Qualität und Kontrolle im eigenen Haus",
     description:
-      "Optiprint-Leiterplatten werden erstmals in Satellitensystemen eingesetzt. Ein bedeutender Meilenstein, der die höchste Qualität und Zuverlässigkeit unserer Produkte bestätigt. Diese Anwendung unter extremsten Bedingungen unterstreicht die technologische Spitzenposition von Optiprint.",
+      "Mit der Integration einer internen Galvanik gewinnt Optiprint volle Kontrolle über einen essenziellen Produktionsschritt. Für Kunden bedeutet das mehr Sicherheit und gleichbleibend hohe Qualität. Für das Unternehmen ist es ein weiterer Schritt auf dem Weg zur vollständigen Fertigungskompetenz – als zuverlässiger PCB-Partner in der Schweiz.",
     imagePath: "/images/image5.jpg"
   },
   {
-    year: "2015",
-    title: "Team-Wachstum",
+    year: "2000",
+    title: "Führungswechsel: Optiprint setzt auf Weitblick und Konstanz ",
     description:
-      "Optiprint beschäftigt zum ersten Mal 100 Mitarbeitende. Ein Zeichen für das konstante Wachstum und die zunehmende Bedeutung am Markt. Das Team vereint Expertise aus verschiedenen Fachbereichen und bildet das Fundament für den anhaltenden Erfolg.",
+      "Hans-Jörg Etter übernimmt die Geschäftsführung von seinem Vater und führt Optiprint in eine neue Phase des Wachstums. Die langfristige Ausrichtung auf technologische Weiterentwicklung und Kundenbindung stärkt die Position als vertrauenswürdiger Schweizer PCB-Hersteller. ",
     imagePath: "/images/image6.jpg"
   },
   {
-    year: "2018",
-    title: "Modernisierung",
+    year: "2002",
+    title: "Einstieg in Lasertechnologie: Präzision neu definiert",
     description:
-      "Bedeutende Investitionen in modernste Produktionstechnologien ermöglichen höhere Präzision und Effizienz bei der Herstellung von High-Tech-Leiterplatten. Die Digitalisierung der Fertigungsprozesse hebt die Produktion auf ein neues Niveau.",
+      "Die Anschaffung der ersten Laserbohr- und Schneidmaschine eröffnet neue Möglichkeiten bei der Bearbeitung feinster Strukturen. Mit dieser Investition positioniert sich Optiprint als Anbieter für hochkomplexe Lösungen und bestätigt seine Rolle im Bereich innovativer Leiterplattentechnologie Schweiz. ",
     imagePath: "/images/image7.jpg"
   },
   {
-    year: "2022",
-    title: "Nachhaltige Produktion",
+    year: "2008",
+    title: "Kupfergalvanik: Ein weiterer Schritt zur Fertigungstiefe ",
     description:
-      "Optiprint erhält eine renommierte Auszeichnung für nachhaltige Produktionsprozesse in der Elektronikindustrie. Ein weiterer Schritt in Richtung umweltbewusste Zukunft. Die Verringerung des ökologischen Fußabdrucks wird zu einem zentralen Unternehmensziel.",
+      "Die Implementierung der hauseigenen Kupfergalvanik verbessert die Materialstabilität und erhöht die Präzision – besonders bei hochdichten Leiterplattendesigns. Optiprint unterstreicht damit seine Rolle als Swiss PCB Partner für höchste Anforderungen. ",
     imagePath: "/images/image8.jpg"
   },
   {
-    year: "2025",
-    title: "40 Jahre Innovation",
+    year: "2010",
+    title: "Standortausbau und Nachhaltigkeit: Verantwortung übernehmen ",
     description:
-      "Wir feiern unser 40-jähriges Bestehen mit Stolz auf die Vergangenheit und Vorfreude auf die Zukunft. Gemeinsam mit unseren Kunden, Mitarbeitenden und Partnern blicken wir auf eine erfolgreiche Geschichte zurück und richten den Blick auf kommende Herausforderungen.",
+      "Die Erweiterung des Standorts Berneck wird zum Symbol für Wachstum mit Weitblick. Neue Maschinen, optimierte Prozesse und die Installation von Solarpanels (30 % Eigenstromanteil) machen Optiprint zum Vorreiter in Sachen verantwortungsvolle Leiterplattenproduktion in der Schweiz.",
     imagePath: "/images/image9.jpg"
+  },
+  {
+    year: "2025",
+    title: "Jubiläum: 40 Jahre Optiprint – Kompetenz, Innovation, Vertrauen  ",
+    description:
+      "Zum 40-jährigen Bestehen blickt Optiprint auf eine einzigartige Entwicklung zurück: Vom kleinen Betrieb zum führenden Schweizer Leiterplattenhersteller, geschätzt für innovative PCB-Technologien und Zuverlässigkeit. Dieses Jubiläum ist nicht nur ein Rückblick – sondern ein klares Bekenntnis zur Zukunft: Swiss Quality. Since 1985.",
+    imagePath: "/images/image10.png"
   },
 ]
 
@@ -141,7 +148,7 @@ export default function Timeline() {
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-[#d1d5db] hidden md:block" 
                style={{
                  top: "205px", 
-                 height: `calc(100% - 450px)`,
+                 height: `calc(100% - 420px)`,
                }}>
             {/* Progress overlay */}
             <div className="absolute top-0 left-0 right-0 bg-[#002F63] transition-all duration-500 ease-out"

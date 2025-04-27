@@ -90,7 +90,7 @@ export default function ThreeJsHero() {
     setModelStatus("Attempting to load 3D model...");
     
     loader.load(
-      "/receiver_development_platform_motherboard.glb",
+      "/tripo_pbr_model_50b8373b-68de-4f0e-bf1c-60efbaaf5e20.glb",
       (gltf) => {
         setModelStatus("Model loaded successfully!");
         

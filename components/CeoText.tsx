@@ -62,7 +62,7 @@ export default function CeoText() {
             className={`text-sm font-semibold tracking-wide text-left transition-all duration-1000 transform ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}
             style={{ transitionDelay: '700ms' }}
           >
-            HANS JÖRG, CEO AT OPTIPRINT AG
+            HANS-JÖRG ETTER, CEO DER OPTIPRINT AG 
           </p>
         </div>
       </div>
