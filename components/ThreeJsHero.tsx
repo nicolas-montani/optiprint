@@ -12,15 +12,16 @@ export default function ThreeJsHero() {
   // Fixed values
   const baseScaleFactor = 3.0; // Scale factor
   const cameraDistance = 3;
-  const zRotation = 45; // 45 degree rotation on Z axis (in degrees)
-  
+  const zRotation = -45; // 45 degree rotation on Z axis (in degrees)
+  const yRotation = 180; // Y rotation 
+
   // Scroll animation settings
   const minZRotation = zRotation * (Math.PI / -180); // Initial Z rotation (converted to radians)
   const maxZRotation = (zRotation + 45) * (Math.PI / -180); // More negative rotation on scroll
   const minCameraY = 0; // Initial Y position
   const maxCameraY = 1.55; // Final Y position on full scroll
   const minCameraZ = cameraDistance; // Initial Z distance
-  const maxCameraZ = cameraDistance - 1.95; // Final Z distance (zoomed in) on full scroll
+  const maxCameraZ = cameraDistance - 1.50; // Final Z distance (zoomed in) on full scroll
   
   // Animation settings
   const rotationSpeed = 0.005; // Speed of rotation animation
@@ -115,6 +116,8 @@ export default function ThreeJsHero() {
         gltf.scene.position.x = -center.x * baseActualScaleFactor;
         gltf.scene.position.y = -center.y * baseActualScaleFactor;
         gltf.scene.position.z = -center.z * baseActualScaleFactor;
+        // turn model 180 degrees on Y axis
+        gltf.scene.rotation.y = (yRotation * Math.PI) / 180;
         
         // Add the model to the rotation group
         modelGroup.add(gltf.scene);
@@ -181,7 +184,7 @@ export default function ThreeJsHero() {
       
       // Continuously rotate the model group around X axis
       if (modelRef.current) {
-        modelRef.current.rotation.x += rotationSpeed;
+        modelRef.current.rotation.y += rotationSpeed;
       }
       
       renderer.render(scene, camera);
