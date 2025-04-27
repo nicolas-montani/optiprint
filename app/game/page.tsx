@@ -209,7 +209,6 @@ export default function Home() {
             <p className="text-[#002F63] text-xs tracking-wide">DRÜCKE DIE LEERTASTE ODER TIPPE AUF DEN BILDSCHIRM ZUM STAPELN</p>
           </div>
           <div className="mt-4 text-xs text-center text-gray-500">
-            <p>© Nicolas Montani</p>
           </div>
         </div>
       </div>
