@@ -1,42 +1,26 @@
-const linkedInPosts = [
-  {
-    title: "Neue Technologien für die Elektronik von morgen",
-    content:
-      "Optiprint investiert in zukunftsweisende Fertigungstechnologien, um die steigenden Anforderungen in der Elektronikbranche zu erfüllen. Erfahren Sie mehr über unsere neuesten Innovationen.",
-    date: "25. März 2025",
-  },
-  {
-    title: "Optiprint auf der Swiss Medtech Expo 2025",
-    content:
-      "Besuchen Sie uns vom 9. bis 10. September auf der Swiss Medtech Expo in Luzern. Wir präsentieren unsere spezialisierten Lösungen für die Medizintechnik.",
-    date: "09. Februar 2025",
-  },
-  {
-    title: "40 Jahre Innovation und Qualität",
-    content:
-      "2025 feiert Optiprint sein 40-jähriges Jubiläum. Erfahren Sie mehr über unsere Erfolgsgeschichte und die Meilensteine, die uns zu dem gemacht haben, was wir heute sind.",
-    date: "15. Januar 2025",
-  },
-]
 
-export default function LinkedInFeed() {
+import React from 'react';
+
+const LinkedInFeed = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-[#002F63]">Optiprint auf LinkedIn</h2>
-        <div className="max-w-4xl mx-auto">
-          {linkedInPosts.map((post, index) => (
-            <div
-              key={index}
-              className={`pb-8 mb-8 ${index < linkedInPosts.length - 1 ? "border-b border-gray-200" : ""}`}
-            >
-              <h3 className="text-xl md:text-2xl font-medium mb-4">{post.title}</h3>
-              <p className="text-gray-700 mb-4">{post.content}</p>
-              <p className="text-sm text-gray-500">{post.date}</p>
-            </div>
-          ))}
-        </div>
+    <div className="w-full px-4 md:px-8 mt-24 lg:px-12">
+      <img 
+        src="images/linkedin.png" 
+        alt="LinkedIn Feed" 
+        className="mx-auto w-full max-w-4xl rounded-lg shadow-md my-6" 
+      />
+      <div className="flex justify-center mt-8 mb-12">
+        <a 
+          href="https://www.linkedin.com/company/optiprint-ag/posts/?feedView=all" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="shadow-md text-center bg-[#002F63] text-white py-3 px-6 rounded-lg hover:bg-[#00407D] transition-colors duration-300 w-full sm:w-2/3 md:w-1/2 lg:w-1/3 hover:shadow-lg"
+        >
+          Visit our LinkedIn page
+        </a>
       </div>
-    </section>
-  )
-}
+    </div>
+  );
+};
+
+export default LinkedInFeed;
