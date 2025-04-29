@@ -72,7 +72,7 @@ export default function Home() {
       clickCountRef.current += 1;
       
       // If we've reached 10+ clicks and haven't shown the easter egg yet
-      if (clickCountRef.current >= 10 && !showEasterEgg) {
+      if (clickCountRef.current >= 100 && !showEasterEgg) {
         setShowEasterEgg(true);
         setClicksLeft(5); // Start countdown from 5 after showing
       }
