@@ -66,7 +66,7 @@ export default function Home() {
     
     const handleTouch = (e: any) => {
       // Prevent double counting of touch and click on mobile devices
-      if (e.type === 'click' && e.pointerType === 'touch') return;
+      if (e.type === 'click' ) return;
       
       // Increment click count
       clickCountRef.current += 1;
