@@ -3,12 +3,16 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/react"
+import { LanguageProvider } from "@/lib/language-context"
+import LanguageSwitcher from "@/components/language-switcher"
+import { DynamicMetadata } from "./metadata"
 
 const inter = Inter({ subsets: ["latin"] })
 
+// Static metadata (will be overridden by DynamicMetadata on client side)
 export const metadata: Metadata = {
-  title: "Optiprint | 40 Jahre innovativer PCB-Partner weltweit",
-  description: "Seit 40 Jahren ist Optiprint zuverlässiger Leiterplattenhersteller aus der Schweiz für anspruchsvolle Anwendungen von der Medizintechnik bis zur Raumfahrt.",
+  title: "Optiprint | 40 Years of Innovative PCB Partner Worldwide",
+  description: "For 40 years, Optiprint has been a reliable PCB manufacturer from Switzerland for demanding applications from medical technology to aerospace.",
 }
 
 export default function RootLayout({
@@ -17,13 +21,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="de">
-       <head>
+    <html lang="en">
+      <head>
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       </head>
       <body className={inter.className}>
-        {children}
-        <Analytics />
+        <LanguageProvider>
+          <DynamicMetadata />
+          <LanguageSwitcher />
+          {children}
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   )

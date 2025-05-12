@@ -2,80 +2,8 @@
 
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-
-// Original milestones array remains unchanged
-const milestones = [
-  {
-    year: "1985",
-    title: "Gründung von Optiprint: Der Ursprung von 40 Jahren Schweizer Präzision",
-    description:
-      "Im Jahr 1985 wird Optiprint als Schweizer Leiterplattenhersteller in Rehetobel AR gegründet – mit einer klaren Vision: Leiterplattenfertigung mit Präzision, Qualität und technologischem Anspruch. In einer ehemaligen Weberei startet das Unternehmen mit ersten Kundenaufträgen – der Beginn von 40 Jahren Optiprint. Von Anfang an steht das Streben nach Verlässlichkeit und technologischer Exzellenz im Zentrum. ",
-    imagePath: "/images/image1.png"
-  },
-  {
-    year: "1987",
-    title: "Erste Hochfrequenzleiterplatte: Technologischer Vorsprung früh gesichert",
-    description:
-      "Bereits zwei Jahre nach der Gründung entwickelt Optiprint seine erste Hochfrequenzleiterplatte. Die frühe Spezialisierung in diesem Bereich macht das Unternehmen zu einem der Pioniere der innovativen Leiterplattentechnologie in der Schweiz. Besonders Kunden aus der Telekommunikation profitieren von der technologischen Weitsicht. ",
-    imagePath: "/images/image2.jpg"
-  },
-  {
-    year: "1989",
-    title: "Starr-Flex-Technologie als Wendepunkt für Spezialanwendungen",
-    description:
-      "Mit der Einführung der Starr-Flex-Leiterplatte erweitert Optiprint sein Portfolio um eine besonders vielseitige Lösung für kompakte und robuste Designs. Die Technologie etabliert das Unternehmen als zuverlässigen PCB-Partner Schweiz, insbesondere für anspruchsvolle Kunden in der Medizintechnik und Verteidigung.",
-    imagePath: "/images/image3.jpg"
-  },
-  {
-    year: "1998",
-    title: "Umzug nach Berneck: Standort mit Zukunft",
-    description:
-      "Optiprint zieht 1998 an den heutigen Standort in Berneck. Die deutlich größere Fläche schafft Raum für mehr Maschinen, bessere Abläufe und zukunftsorientierte Prozesse. Damit wird der Weg geebnet für weiteres Wachstum als Schweizer Leiterplattenhersteller mit internationaler Ausrichtung. ",
-    imagePath: "/images/image4.jpg"
-  },
-  {
-    year: "1999",
-    title: "Eigene Galvanik: Qualität und Kontrolle im eigenen Haus",
-    description:
-      "Mit der Integration einer internen Galvanik gewinnt Optiprint volle Kontrolle über einen essenziellen Produktionsschritt. Für Kunden bedeutet das mehr Sicherheit und gleichbleibend hohe Qualität. Für das Unternehmen ist es ein weiterer Schritt auf dem Weg zur vollständigen Fertigungskompetenz – als zuverlässiger PCB-Partner in der Schweiz.",
-    imagePath: "/images/image5.jpg"
-  },
-  {
-    year: "2000",
-    title: "Führungswechsel: Optiprint setzt auf Weitblick und Konstanz ",
-    description:
-      "Hans-Jörg Etter übernimmt die Geschäftsführung von seinem Vater und führt Optiprint in eine neue Phase des Wachstums. Die langfristige Ausrichtung auf technologische Weiterentwicklung und Kundenbindung stärkt die Position als vertrauenswürdiger Schweizer PCB-Hersteller. ",
-    imagePath: "/images/image6.jpg"
-  },
-  {
-    year: "2002",
-    title: "Einstieg in Lasertechnologie: Präzision neu definiert",
-    description:
-      "Die Anschaffung der ersten Laserbohr- und Schneidmaschine eröffnet neue Möglichkeiten bei der Bearbeitung feinster Strukturen. Mit dieser Investition positioniert sich Optiprint als Anbieter für hochkomplexe Lösungen und bestätigt seine Rolle im Bereich innovativer Leiterplattentechnologie Schweiz. ",
-    imagePath: "/images/image7.jpg"
-  },
-  {
-    year: "2008",
-    title: "Kupfergalvanik: Ein weiterer Schritt zur Fertigungstiefe ",
-    description:
-      "Die Implementierung der hauseigenen Kupfergalvanik verbessert die Materialstabilität und erhöht die Präzision – besonders bei hochdichten Leiterplattendesigns. Optiprint unterstreicht damit seine Rolle als Swiss PCB Partner für höchste Anforderungen. ",
-    imagePath: "/images/image8.jpg"
-  },
-  {
-    year: "2010",
-    title: "Standortausbau und Nachhaltigkeit: Verantwortung übernehmen ",
-    description:
-      "Die Erweiterung des Standorts Berneck wird zum Symbol für Wachstum mit Weitblick. Neue Maschinen, optimierte Prozesse und die Installation von Solarpanels (30 % Eigenstromanteil) machen Optiprint zum Vorreiter in Sachen verantwortungsvolle Leiterplattenproduktion in der Schweiz.",
-    imagePath: "/images/image9.jpg"
-  },
-  {
-    year: "2025",
-    title: "Jubiläum: 40 Jahre Optiprint – Kompetenz, Innovation, Vertrauen  ",
-    description:
-      "Zum 40-jährigen Bestehen blickt Optiprint auf eine einzigartige Entwicklung zurück: Vom kleinen Betrieb zum führenden Schweizer Leiterplattenhersteller, geschätzt für innovative PCB-Technologien und Zuverlässigkeit. Dieses Jubiläum ist nicht nur ein Rückblick – sondern ein klares Bekenntnis zur Zukunft: Swiss Quality. Since 1985.",
-    imagePath: "/images/image10.png"
-  },
-]
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
 
 // Define a type for the milestone
 interface Milestone {
@@ -86,6 +14,15 @@ interface Milestone {
 }
 
 export default function Timeline() {
+  const { language } = useLanguage();
+  const t = translations[language];
+  
+  // Get milestones from translations
+  const milestones = t.timeline.milestones.map((milestone, index) => ({
+    ...milestone,
+    imagePath: `/images/image${index + 1}${index === 9 ? '.png' : '.jpg'}`
+  }));
+  
   const [activeMilestones, setActiveMilestones] = useState<boolean[]>(new Array(milestones.length).fill(false));
   const [progress, setProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
@@ -136,12 +73,12 @@ export default function Timeline() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [activeMilestones.length]);
+  }, [activeMilestones.length, milestones.length]);
   
   return (
     <section ref={sectionRef} className="py-20 bg-white" id="timeline">
       <div className="container mx-auto px-4 max-w-7xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-20 text-center text-[#002F63]">UNSERE MEILENSTEINE</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-20 text-center text-[#002F63]">{t.timeline.heading}</h2>
         
         <div className="relative" ref={timelineRef}>
           {/* Timeline center line */}

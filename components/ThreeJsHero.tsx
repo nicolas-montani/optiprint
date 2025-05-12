@@ -4,8 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import Image from "next/image";
+import { useLanguage } from '@/lib/language-context';
+import { translations } from '@/lib/translations';
 
 export default function ThreeJsHero() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const canvasRef = useRef<HTMLDivElement>(null);
   const [modelStatus, setModelStatus] = useState<string>("Loading 3D model...");
   
@@ -225,7 +229,7 @@ export default function ThreeJsHero() {
       <div className="absolute top-0 left-0 z-10 p-8 md:p-[5%] mt-16">
         <div>
           <h1 className="text-[#002F63] text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light italic leading-none mb-4">
-            40 JAHRE
+            {t.hero.years}
           </h1>
           {/* Replaced text with SVG logo */}
           <div className="mb-8">

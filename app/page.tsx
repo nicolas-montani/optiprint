@@ -9,6 +9,7 @@ import Footer from "@/components/footer";
 import CeoText from "@/components/CeoText";
 import { useRouter } from "next/navigation";
 import VideoSection from "@/components/VideoSection";
+import { useLanguage } from "@/lib/language-context";
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);

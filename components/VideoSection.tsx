@@ -166,7 +166,7 @@ export default function VideoSection() {
             src="/video/Optiprintv3_wENGsubs.mp4"
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
-            poster="/public/video/thumbnail.jpg"
+            poster="/video/thumbnail.jpg"
             style={{ 
               outline: 'none',
               transform: 'scale(1.005)',
