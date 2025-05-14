@@ -228,7 +228,7 @@ export default function ThreeJsHero() {
       {/* Text overlay - adjusted to be lower with mt-16 (margin-top) */}
       <div className="absolute top-0 left-0 z-10 p-8 md:p-[5%] mt-16">
         <div>
-          <h1 className="text-[#002F63] text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light italic leading-none mb-4">
+          <h1 className="text-[#002F63] text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-none mb-4">
             {t.hero.years}
           </h1>
           {/* Replaced text with SVG logo */}
