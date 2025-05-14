@@ -20,7 +20,7 @@ export default function Timeline() {
   // Get milestones from translations
   const milestones = t.timeline.milestones.map((milestone, index) => ({
     ...milestone,
-    imagePath: `/images/image${index + 1}${index === 9 ? '.png' : '.jpg'}`
+    imagePath: `/images/image${index + 1}${index === 0 || index === 9 ? '.png' : '.jpg'}`
   }));
   
   const [activeMilestones, setActiveMilestones] = useState<boolean[]>(new Array(milestones.length).fill(false));
