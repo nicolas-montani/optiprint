@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Vectora LT Light';
+  src: url('/Vectora LT Light Regular/Vectora LT Light Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 248, 248, 248;

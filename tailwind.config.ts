@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        vectora: ['var(--font-vectora)', 'sans-serif'],
+      },
       colors: {
         'optiprint': {
           blue: '#002F63',  // RGB: 0, 47, 99
